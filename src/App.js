@@ -4,6 +4,8 @@ import './css/App.css';
 
 import EditorBlock from './EditorBlock';
 import DisplayBlock from './DisplayBlock';
+import DropZone from './DropZone';
+import AddNewBlock from './AddNewBlock';
 
 class App extends Component {
 
@@ -27,32 +29,41 @@ class App extends Component {
   }
 
   upDateContent(index, contentValue){
-    // console.log(
-    //   'change handler in app', 
-    //   this.state.textBlocks[index]
-    // );
     let blocks = [...this.state.textBlocks];
     let block = {...blocks[index]};
     block.content = contentValue;
     blocks[index] = block;
     this.setState({ textBlocks: blocks });
-  //   handleChange = (e) => {
-  //     this.setState(prevState => ({
-  //         items: {
-  //             ...prevState.items,
-  //             [prevState.items[1].name]: e.target.value,
-  //         },
-  //     }));
-  // };
-  
+  }
+
+  updateElement(index, el){
+    let blocks = [...this.state.textBlocks];
+    let block = {...blocks[index]};
+    block.element = el;
+    blocks[index] = block;
+    this.setState({ textBlocks: blocks });
+  }
+
+  addNewBlock(){
+    console.log('add new block');
+    const newBlock = {
+      element: 'p',
+      content: '',
+    }
+    this.setState({ textBlocks: [...this.state.textBlocks, newBlock ] });
+  }
+
+  deleteBlock(index){
+console.log('splica detta index', index)
+    const blocks = [...this.state.textBlocks];
+    blocks.splice(index,1);
+    this.setState({textBlocks: blocks});
   }
 
   render(){
-    const content = this.state.textBlocks.length > 0 
-    ? this.state.textBlocks.map(block => `<${block.element}>${block.content}</${block.element}>`)
-    : null ;
-
-    // console.log(this.state.textBlocks);
+    // const content = this.state.textBlocks.length > 0 
+    // ? this.state.textBlocks.map(block => `<${block.element}>${block.content}</${block.element}>`)
+    // : null 
 
 
     return (
@@ -65,16 +76,30 @@ class App extends Component {
           <section className="layout__block-50">
             {
               this.state.textBlocks.length 
-              ? this.state.textBlocks.map( (block, index) => <EditorBlock key={index} index={index} onChangeHandler={this.upDateContent.bind(this)} elementType={block.element} content={block.content} />)
+              ? this.state.textBlocks.map( 
+                (block, index) => 
+                <>
+                <div key={`textblock_${index}`}>
+                  <EditorBlock 
+                    index={index} 
+                    onChangeHandler={this.upDateContent.bind(this)}
+                    deleteHandler={this.deleteBlock.bind(this)}
+                    elementType={block.element} 
+                    content={block.content}
+                    updateElement={this.updateElement.bind(this)}
+                  />
+                </div>
+                  <DropZone index={index} />
+                </>
+                )
               : null
             }
+            <AddNewBlock handleClick={this.addNewBlock.bind(this)} />
           </section>
           <aside className="layout__block-50">
-            {
-              content != null && content.length > 0
-              ? <DisplayBlock content={content} />
-              : null
-            }
+            
+              <DisplayBlock blocks={this.state.textBlocks} />
+            
           </aside>
         </main>
       </div>

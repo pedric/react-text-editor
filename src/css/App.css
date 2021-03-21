@@ -28,10 +28,10 @@
 }
 
 .layout__block-50 {
-  min-height: calc(100vh - 65px);
+  /* min-height: calc(100vh - 65px); */
   padding: 16px;
 }
 
 .layout__block-50:first-of-type {
-  border-right: 1px solid #f5f5f5;
+  /* border-right: 1px solid #f5f5f5; */
 }

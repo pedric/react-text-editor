@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 
 const DisplayBlock = (props) => {
   
-  // console.log(props);
-
-  // makeContent = (content) => {
-  //   return 
-  // }
+  const content = props.blocks.length > 0 
+  ? props.blocks.map(block => `<${block.element}>${block.content}</${block.element}>`)
+  : null
 
   return(
-    <div dangerouslySetInnerHTML={{ __html: props.content }}></div>
+    content === null
+    ?  null
+    :  <div dangerouslySetInnerHTML={{ __html: content }}></div>
   )
 
 }
