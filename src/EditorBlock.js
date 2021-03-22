@@ -10,11 +10,11 @@ const EditorBlock = (props) => {
   useEffect(() => {
     setPlaceHolder(`Type to edit. This is now a ${props.elementType}-element, click "edit" to change.`);
     // props.onChangeHandler(props.index, props.content);
-    // setContent(props.content);
+    setContent(props.content);
     return () => {
       setContent('');
     }
-  },[placeHolder]);
+  },[placeHolder, content, props]);
 
   const updateContent = (e) => {
     props.onChangeHandler(props.index, e.target.value);
@@ -23,7 +23,6 @@ const EditorBlock = (props) => {
 
   const startDrag = (e) => {
     handleDrag(true);
-    // e.dataTransfer.setData("element", e.target);
   }
 
   const stopDrag = () => {
@@ -32,7 +31,8 @@ const EditorBlock = (props) => {
 
   return(
     <div
-    id={`editorblock-${props.index}`} 
+    id={`editorblock-${props.index}`}
+    className={draggable ? 'isMoving' : ''} 
     draggable={draggable ? 'true' : 'false'} 
     onDragStart={(e) => e.dataTransfer.setData("index", props.index)}>
       <div>

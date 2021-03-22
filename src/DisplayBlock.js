@@ -16,7 +16,7 @@ const DisplayBlock = (props) => {
   
   const content = props.blocks.length > 0 
   ? props.blocks.map(block => `<${block.element}>${block.content}</${block.element}>`)
-  : null
+  : null ;
 
   return(
   <>
@@ -27,7 +27,7 @@ const DisplayBlock = (props) => {
   {
     content === null
     ?  null
-    :  displayRaw ? <pre>{content}</pre> : <div dangerouslySetInnerHTML={{ __html: content }}></div>
+    :  displayRaw ? <pre style={{whiteSpace:'normal'}}>{content}</pre> : <div dangerouslySetInnerHTML={{ __html: content }}></div>
   }
   </article>
   </>

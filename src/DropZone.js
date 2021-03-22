@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import DropZoneWrapper from './components/DropZoneWrapper';
 
 const DropZone = (props) => {
 
   const [hover, onHover] = useState(false);
   const [dropped, onDrop] = useState(false);
-
-  useEffect(() => {
-    console.log(hover);
-  },[hover]);
 
   const dropHandler = (e) => {
     onDrop(true);

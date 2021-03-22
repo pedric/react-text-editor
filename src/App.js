@@ -17,10 +17,6 @@ class App extends Component {
     }
   }
 
-  componentDidUpdate(){
-    // console.log('update');
-  }
-
   componentDidMount(){
     const firstBlock = {
       element: 'h1',
@@ -62,18 +58,10 @@ class App extends Component {
 
   handleDrop = (e) => {
     e.preventDefault();
-    console.log(this.state.textBlocks);
-    // console.log('handle dropp 2', e.dataTransfer.getData('index') )
-    // console.log('handle dropp ', e.target.getAttribute('data-index') )
-    // let blocks = [...this.state.textBlocks];
     let blocks = _.cloneDeep( this.state.textBlocks );
     let elementToMove = blocks[e.dataTransfer.getData('index')];
-    blocks.splice(e.dataTransfer.getData('index'),1); // ta bort element från förra position
-    blocks.splice(e.target.getAttribute('data-index'),0,elementToMove); // sätt in nytt el men få med index från dropzone
-    // let block = {...blocks[index]};
-    // block.element = el;
-    // blocks[index] = block;
-    console.log(blocks);
+    blocks.splice(e.dataTransfer.getData('index'),1);
+    blocks.splice(e.target.getAttribute('data-index'),0,elementToMove);
     this.setState({ textBlocks: blocks });
   }
 
@@ -88,7 +76,7 @@ class App extends Component {
         <main className="layout">
           <section className="layout__block-50">
             {
-              this.state.textBlocks.length 
+              this.state.textBlocks.length >= 0 
               ? this.state.textBlocks.map( 
                 (block, index) => 
                 <React.Fragment key={`fragment_${index}`}>

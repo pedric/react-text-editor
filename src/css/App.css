@@ -90,3 +90,7 @@
   background: #ff63474d;
   border: 1px solid #fb7057;
 }
+
+.isMoving {
+  background: rgba(0, 0, 0, 0.05);
+}
