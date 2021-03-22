@@ -35,3 +35,58 @@
 .layout__block-50:first-of-type {
   /* border-right: 1px solid #f5f5f5; */
 }
+
+.form-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-wrapper .control-panel {
+  width: 60px;
+}
+
+.form-wrapper button.btn.btn--round {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid #ccc;
+}
+
+.form-wrapper form {
+  width: calc(100% - 70px);
+}
+
+.form-wrapper textarea {
+  width: 100%;
+  height: 200px;
+  border: 1px solid #ccc;
+  background: rgb(204 204 204 / 5%);
+  resize: none;
+}
+
+.form-wrapper .button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-wrapper button {
+  margin: 8px 4px;
+  border-radius: 10px;
+  transition: transform 150ms ease-in-out;
+}
+
+.form-wrapper button:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.form-wrapper button.btn {
+  background: rgb(0 255 0 / 25%);
+  border: 1px solid #58fb58;
+}
+
+.form-wrapper button.btn--alert.btn--round {
+  background: #ff63474d;
+  border: 1px solid #fb7057;
+}

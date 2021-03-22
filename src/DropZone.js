@@ -1,33 +1,32 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import DropZoneWrapper from './components/DropZoneWrapper';
 
 const DropZone = (props) => {
 
-  const Div = styled.div`
-    height: 20px;
-    border: 1px dashed #ccc;
-    margin: 16px auto;
-    color: #ccc;
-    font-size: 14px;
-    transition: all 500ms ease-in-out;
-
-    &.active {
-      background: #dbf4fb;
-      height: 60px;
-    }
-  `;
-
   const [hover, onHover] = useState(false);
-  const [drop, onDrop] = useState(null);
+  const [dropped, onDrop] = useState(false);
+
+  useEffect(() => {
+    console.log(hover);
+  },[hover]);
+
+  const dropHandler = (e) => {
+    onDrop(true);
+    onHover(false);
+    props.handleDrop(e);
+  }
 
   return(
-    <Div 
+    <DropZoneWrapper
+    data-dropped={dropped}
     className={hover ? 'active' : ''} 
-    data-index={props.index} 
+    data-index={props.index}
+    onDragOver={(e) => e.preventDefault()} 
     onDragLeave={() => onHover(false)} 
-    onDragEnter={() => onHover(true)}>
-      Drop block here to change order
-    </Div>
+    onDragEnter={() => onHover(true)}
+    onDrop={(e) => dropHandler(e)}>
+      {dropped ? 'Element dropped!' : 'Drop block here to change order' }
+    </DropZoneWrapper>
   )
 }
 

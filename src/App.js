@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import logo from './logo.svg';
 import './css/App.css';
 
@@ -29,6 +30,7 @@ class App extends Component {
   }
 
   upDateContent(index, contentValue){
+    contentValue = contentValue.replace(/\n/g, '<br/>');
     let blocks = [...this.state.textBlocks];
     let block = {...blocks[index]};
     block.content = contentValue;
@@ -45,26 +47,37 @@ class App extends Component {
   }
 
   addNewBlock(){
-    console.log('add new block');
     const newBlock = {
-      element: 'p',
+      element: 'div',
       content: '',
     }
     this.setState({ textBlocks: [...this.state.textBlocks, newBlock ] });
   }
 
   deleteBlock(index){
-console.log('splica detta index', index)
     const blocks = [...this.state.textBlocks];
     blocks.splice(index,1);
     this.setState({textBlocks: blocks});
   }
 
-  render(){
-    // const content = this.state.textBlocks.length > 0 
-    // ? this.state.textBlocks.map(block => `<${block.element}>${block.content}</${block.element}>`)
-    // : null 
+  handleDrop = (e) => {
+    e.preventDefault();
+    console.log(this.state.textBlocks);
+    // console.log('handle dropp 2', e.dataTransfer.getData('index') )
+    // console.log('handle dropp ', e.target.getAttribute('data-index') )
+    // let blocks = [...this.state.textBlocks];
+    let blocks = _.cloneDeep( this.state.textBlocks );
+    let elementToMove = blocks[e.dataTransfer.getData('index')];
+    blocks.splice(e.dataTransfer.getData('index'),1); // ta bort element från förra position
+    blocks.splice(e.target.getAttribute('data-index'),0,elementToMove); // sätt in nytt el men få med index från dropzone
+    // let block = {...blocks[index]};
+    // block.element = el;
+    // blocks[index] = block;
+    console.log(blocks);
+    this.setState({ textBlocks: blocks });
+  }
 
+  render(){
 
     return (
       <div className="App">
@@ -78,9 +91,9 @@ console.log('splica detta index', index)
               this.state.textBlocks.length 
               ? this.state.textBlocks.map( 
                 (block, index) => 
-                <>
-                <div key={`textblock_${index}`}>
-                  <EditorBlock 
+                <React.Fragment key={`fragment_${index}`}>
+                <div>
+                  <EditorBlock
                     index={index} 
                     onChangeHandler={this.upDateContent.bind(this)}
                     deleteHandler={this.deleteBlock.bind(this)}
@@ -89,17 +102,15 @@ console.log('splica detta index', index)
                     updateElement={this.updateElement.bind(this)}
                   />
                 </div>
-                  <DropZone index={index} />
-                </>
+                  <DropZone handleDrop={this.handleDrop.bind(this)} index={index} />
+                </React.Fragment>
                 )
               : null
             }
             <AddNewBlock handleClick={this.addNewBlock.bind(this)} />
           </section>
           <aside className="layout__block-50">
-            
               <DisplayBlock blocks={this.state.textBlocks} />
-            
           </aside>
         </main>
       </div>
