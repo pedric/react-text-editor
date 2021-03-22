@@ -27,7 +27,7 @@ const DisplayBlock = (props) => {
   {
     content === null
     ?  null
-    :  displayRaw ? <pre style={{whiteSpace:'normal'}}>{content}</pre> : <div dangerouslySetInnerHTML={{ __html: content }}></div>
+    :  displayRaw ? <pre style={{whiteSpace:'normal'}}>{content}</pre> : <div dangerouslySetInnerHTML={{ __html: content.join(' ') }}></div>
   }
   </article>
   </>

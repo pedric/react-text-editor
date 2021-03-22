@@ -17,7 +17,7 @@ const ElementPicker = (props) => {
     <button className='btn btn--round' onClick={() => setOptionsVisibility(!visibleOptions)}>Edit</button>
     {
       visibleOptions 
-      ? <div className='options-container'>{elements.map(el => <button onClick={() => handleOptions(el)}>{el}</button>)}</div>
+      ? <div className='options-container'>{elements.map( (el,index) => <button key={`btn-${index}`} onClick={() => handleOptions(el)}>{el}</button>)}</div>
       : null
     }
     </ElementPickerWrapper>
