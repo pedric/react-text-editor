@@ -8,6 +8,10 @@ import DisplayBlock from './DisplayBlock';
 import DropZone from './DropZone';
 import AddNewBlock from './AddNewBlock';
 
+/* 
+* Parent for the whole app as a class-component.
+*/
+
 class App extends Component {
 
   constructor(){

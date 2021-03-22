@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import ElementPickerWrapper from './components/ElementPickerWrapper';
 
+/* 
+* Component where the users choose element for their output.
+*/
+
 const ElementPicker = (props) => {
 
   const [visibleOptions, setOptionsVisibility] = useState(false);

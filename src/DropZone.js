@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import DropZoneWrapper from './components/DropZoneWrapper';
 
+/* 
+* Drop-area for draggable content, used to change order of text blocks.
+*/
+
 const DropZone = (props) => {
 
   const [hover, onHover] = useState(false);

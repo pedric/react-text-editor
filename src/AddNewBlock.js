@@ -9,6 +9,10 @@ const AddNewButton = styled.button`
   padding: 8px;
 `;
 
+/* 
+* Buttoncomponent to add a new block for text input.
+*/
+
 const AddNewBlock = (props) => {
 
   return <AddNewButton onClick={props.handleClick}>Add content block</AddNewButton>

@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import ElementPicker from './ElementPicker';
 
+/* 
+* Component where the users enter text and choose element for it, draggable.
+* "Core component" for the whole app. 
+*/
+
 const EditorBlock = (props) => {
 
   const [content, setContent] = useState('');
