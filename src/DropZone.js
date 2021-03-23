@@ -14,6 +14,9 @@ const DropZone = (props) => {
     onDrop(true);
     onHover(false);
     props.handleDrop(e);
+    if(dropped){
+      setTimeout(() =>{ onDrop(false); },3000);
+    }
   }
 
   return(
